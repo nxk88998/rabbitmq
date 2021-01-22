@@ -56,9 +56,9 @@ rabbitmq-plugins enable rabbitmq_management	#开启web管理接口
 
 备节点上分别执行命令，加入到集群
 ```
-　　　　rabbitmqctl stop_app
-　　　　rabbitmqctl join_cluster  rabbit@h-ncdrdcs7
-　　　　rabbitmqctl start_app
+rabbitmqctl stop_app
+rabbitmqctl join_cluster  rabbit@h-ncdrdcs7
+rabbitmqctl start_app
 ```
 
 其中--ram代表是内存节点，如果希望是磁盘节点则不用加--ram，在rabbitmq集群中，至少需要一个磁盘节点
@@ -89,6 +89,9 @@ rabbitmqctl set_policy -p a1name(vhost名)  ha-allqueue（这个策略的名字�
 ```
 
 在web上面设置
+
+![](images/1.jpg)
+
 ```
 ha-mode：all 表示镜像模式
 ha-sync-mode: automatic 表示自动同步
@@ -100,6 +103,8 @@ https://www.cnblogs.com/lylife/p/5584019.html
 https://blog.csdn.net/qq_35246620/article/details/72473098
 
 2.4消息队列可用性检测与脚本恢复
+
+![](images/2.jpg)
 
 搭建好集群后，这里举例2台rabbitmq服务器，1台主（disk节点）一台备（ram节点）。#建议不要做ram节点，有坑。
 
@@ -118,3 +123,4 @@ vi /usr/lib/systemd/system/rabbitmq-server.service
 [Service]
 LimitNOFILE=16384
 ```
+
